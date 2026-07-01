@@ -1,4 +1,4 @@
-# AES E-Commerce Client
+# AES E-Commerce Client Side Frontend
 
 The frontend client for the **AES E-Commerce** platform, built with React 19, TypeScript, and Vite. It provides the customer-facing shopping experience — browsing products, managing a cart, and checking out — talking to a backend API over HTTP.
 

@@ -1,4 +1,4 @@
-# Aadikshar E-Commerce Website
+# AES E-Commerce Server Side Backend
 
 Server-side (backend) application for the Aadikshar E-Commerce platform. Built with **Node.js**, **TypeScript**, and **Express.js**, using **MongoDB/Mongoose** for data persistence and **JSON Web Tokens (JWT)** for authentication.
 
