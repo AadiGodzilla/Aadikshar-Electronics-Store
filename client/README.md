@@ -39,7 +39,7 @@ The frontend client for the **AES E-Commerce** platform, built with React 19, Ty
     Create a `.env` file in the project root and point the client at your backend API, for example:
 
     ```env
-    VITE_API_BASE_URL=http://localhost:5000/api
+    VITE_KHALTI_SECRET_KEY=<khalti_merchant_secret_key>
     ```
 
     Adjust the variable name/value to match how the API URL is consumed in the codebase and where your backend is running.
