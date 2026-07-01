@@ -1,0 +1,36 @@
+{
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon src/server.ts",
+        "build": "tsc"
+    },
+    "dependencies": {
+        "axios": "^1.17.0",
+        "bcrypt": "^6.0.0",
+        "body-parser": "^2.2.2",
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "jsonwebtoken": "^9.0.3",
+        "mongoose": "^9.6.2",
+        "multer": "^2.1.1",
+        "nodemon": "^3.1.14",
+        "request": "^2.88.2",
+        "tsx": "^4.22.3",
+        "typescript": "^6.0.3"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^6.0.0",
+        "@types/body-parser": "^1.19.6",
+        "@types/cors": "^2.8.19",
+        "@types/dotenv": "^8.2.3",
+        "@types/express": "^5.0.6",
+        "@types/express-serve-static-core": "^5.1.1",
+        "@types/jsonwebtoken": "^9.0.10",
+        "@types/mongoose": "^5.11.97",
+        "@types/multer": "^2.1.0",
+        "@types/node": "^25.9.1",
+        "@types/request": "^2.48.13",
+        "ts-node": "^10.9.2"
+    }
+}
