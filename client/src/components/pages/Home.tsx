@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 export default function HomePage() {
     const navigate = useNavigate();
 
-    const { user, setUser } = useContext<UserContextType>(UserContext);
+    const { setUser } = useContext<UserContextType>(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
