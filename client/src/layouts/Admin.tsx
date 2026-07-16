@@ -11,7 +11,7 @@ import Footer from "../components/ui/Footer";
 export default function AdminLayout() {
     const navigate = useNavigate();
 
-    const { user, setUser } = useContext<UserContextType>(UserContext);
+    const { setUser } = useContext<UserContextType>(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -28,11 +28,6 @@ export default function AdminLayout() {
                     navigate("/");
                 }
             });
-
-        if (!user || user.email !== "admin@shop.com") {
-            toast.error("Access Denied", { theme: "colored" });
-            navigate("/");
-        }
     }, []);
 
     return (

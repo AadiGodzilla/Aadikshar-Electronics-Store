@@ -14,7 +14,7 @@ export default async function verifyKhaltiTransaction(
 
         if (!user) throw new AxiosError("User does not exist", "404");
         if (user.disabled)
-            throw new AxiosError("User is currently disabled", "400");
+            throw new AxiosError("User is currently disabled", "401");
 
         const paymentLookup = await axios.post(
             "https://dev.khalti.com/api/v2/epayment/lookup/",

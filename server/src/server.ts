@@ -8,6 +8,7 @@ import cors from "cors";
 import orderRouter from "./routes/OrderRoutes.js";
 import productRouter from "./routes/ProductRoutes.js";
 import { User } from "./models/User.js";
+import paymentRouter from "./routes/PaymentRoutes.js";
 
 const app = express();
 
@@ -29,24 +30,26 @@ connectMongoDB();
 app.use(userRouter);
 app.use(productRouter);
 app.use(orderRouter);
+app.use(paymentRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server started at http://localhost:${process.env.PORT}`);
 });
 
-if (!(await User.find({ email: "admin@shop.com" }))) {
-    await User.create({
+const user = await User.findOne({ email: "admin@shop.com" });
+
+if (!user) {
+    const admin = {
         fullName: "Admin",
         email: "admin@shop.com",
         password: "Admin@123",
         phone: "0123456789",
-    }).then(() => {
-        console.log(
-            "\nAdmin Credentials:\nEmail: admin@shop.com\nPassword: Admin@123\n",
-        );
+    };
+
+    await User.create(admin).then(() => {
+        console.log("Created Admin User");
     });
-} else {
-    console.log(
-        "\nAdmin Credentials:\nEmail: admin@shop.com\nPassword: Admin@123\n",
-    );
 }
+console.log(
+    "\nAdmin Credentials:\nEmail: admin@shop.com\nPassword: Admin@123\n",
+);

@@ -119,40 +119,17 @@ export default function CartPage() {
 
         if (cartTotal)
             axios
-                .post(
-                    "https://dev.khalti.com/api/v2/epayment/initiate/",
-                    {
-                        return_url: "http://localhost:3000/payment-verify",
-                        website_url: "https://localhost:3000/",
-                        amount: cartTotal * 100 + 100000,
-                        purchase_order_id: "Order01",
-                        purchase_order_name: "test",
-                        customer_info: {
-                            name: user?.fullName,
-                            email: user?.email,
-                            phone: user?.phone,
-                        },
-                        amount_breakdown: [
-                            {
-                                label: "Mark Price",
-                                amount: cartTotal * 100,
-                            },
-                            {
-                                label: "Delivery Fee",
-                                amount: 100000,
-                            },
-                        ],
-                        product_details: productDetails,
-                        merchant_username: "Aadikshar Electronics Store",
-                        merchant_extra: "Aadikshar Electronics Store",
+                .post("http://localhost:5000/payment/initiate", {
+                    amount: cartTotal,
+                    purchase_order_id: "Order01",
+                    purchase_order_name: "test",
+                    customer_info: {
+                        name: user?.fullName,
+                        email: user?.email,
+                        phone: user?.phone,
                     },
-                    {
-                        headers: {
-                            Authorization: `Key ${import.meta.env.VITE_KHALTI_SECRET_KEY}`,
-                            "Content-Type": "application/json",
-                        },
-                    },
-                )
+                    product_details: productDetails,
+                })
                 .then((res) => {
                     const data = res.data as IPaymentInitiateResponse;
                     window.location.href = data.payment_url;

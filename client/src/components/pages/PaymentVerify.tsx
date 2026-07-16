@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import type { IUser } from "../../types/IUser";
-import { UserContext, type UserContextType } from "../../contexts/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -9,8 +8,6 @@ export default function PaymentVerify() {
     const navigate = useNavigate();
 
     const [query] = useSearchParams();
-
-    const { setUser } = useContext<UserContextType>(UserContext);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -27,7 +24,6 @@ export default function PaymentVerify() {
                 },
             })
             .then((res) => {
-                setUser(res.data);
                 const u = res.data as IUser;
 
                 const pidx = query.get("pidx");
@@ -35,35 +31,37 @@ export default function PaymentVerify() {
 
                 if (!pidx || pidx === "") return;
 
-                if (status === "Pending") {
-                    toast.warn("Purchase still pending", {
-                        theme: "colored",
-                    });
-                    navigate("/cart");
-                    return;
-                } else if (status === "Refunded") {
-                    toast.error("Product already refunded", {
-                        theme: "colored",
-                    });
-                    navigate("/cart");
-                    return;
-                } else if (status === "Initiated") {
-                    toast.info("Purchase transaction initiated", {
-                        theme: "colored",
-                    });
-                    navigate("/cart");
-                } else if (status === "Expired") {
-                    toast.error("Transaction window has expired", {
-                        theme: "colored",
-                    });
-                    navigate("/cart");
-                    return;
-                } else if (status?.toLowerCase() === "user canceled") {
-                    toast.error("Transaction cancelled by the user", {
-                        theme: "colored",
-                    });
-                    navigate("/cart");
-                    return;
+                switch (status?.toLowerCase()) {
+                    case "pending":
+                        toast.warn("Purchase still pending", {
+                            theme: "colored",
+                        });
+                        navigate("/cart");
+                        return;
+                    case "refunded":
+                        toast.error("Product already refunded", {
+                            theme: "colored",
+                        });
+                        navigate("/cart");
+                        return;
+                    case "initiated":
+                        toast.info("Purchase transaction initiated", {
+                            theme: "colored",
+                        });
+                        navigate("/cart");
+                        return;
+                    case "expired":
+                        toast.error("Transaction window has expired", {
+                            theme: "colored",
+                        });
+                        navigate("/cart");
+                        return;
+                    case "user cancelled":
+                        toast.error("Transaction was cancelled by the user", {
+                            theme: "colored",
+                        });
+                        navigate("/cart");
+                        return;
                 }
 
                 if (!u) {
